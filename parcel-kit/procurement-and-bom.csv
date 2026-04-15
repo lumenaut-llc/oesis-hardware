@@ -1,0 +1,26 @@
+stage,subsystem,item,quantity,notes
+buy-now,bench air node,ESP32-S3 DevKitC-1,1,First controller for simple node
+buy-now,bench air node,SHT45 breakout,1,Primary temp and humidity sensor
+buy-now,bench air node,BME688 breakout,1,Pressure plus VOC/gas trend sensor
+buy-now,bench air node,830-point breadboard,1,Main prototyping board
+buy-now,bench air node,Female-to-male jumper wire pack,1,Most useful first jumper set
+buy-now,bench air node,Male-to-male jumper wire pack,1,Useful for breadboard routing
+buy-now,bench air node,USB-C data cable,2,Need true data cables not charge-only
+buy-now,bench air node,USB power source or laptop port,1,For bench testing
+buy-next,mast-lite,SPS30 particulate sensor,1,Adds PM coverage
+buy-next,mast-lite,Outdoor enclosure,1,Weather protection for controller/power
+buy-next,mast-lite,Radiation shield,1,Keep temp/RH sensor out of sun and electronics heat
+buy-next,mast-lite,Cable glands,4,Weather-sealed cable entry
+buy-next,mast-lite,12V power supply,1,Outdoor or semi-permanent power
+buy-next,mast-lite,5V buck converter,1,Power conversion for board/sensors
+buy-next,weather + PM mast,SparkFun Weather Meter Kit,1,Wind speed direction and rainfall
+buy-next,weather + PM mast,Mast/brackets/hose clamps,1 set,Outdoor mounting hardware
+buy-later,flood node,Second ESP32 board,1,Dedicated controller for flood node
+buy-later,flood node,MB7389 ultrasonic sensor,1,Outdoor depth/distance sensing
+buy-later,flood node,Small enclosure,1,Weather protection for flood electronics
+buy-later,flood node,Mount bracket/arm,1,Rigid mount above low point
+buy-last,thermal pod,Raspberry Pi 5,1,Local compute for 2D sensor pod
+buy-last,thermal pod,Pi power supply,1,Correct stable power for Pi
+buy-last,thermal pod,Pi cooling/case,1,Recommended for reliable operation
+buy-last,thermal pod,MLX90640 thermal array breakout,1,Simple first 2D thermal sensor
+buy-last,thermal pod,Hooded enclosure,1,Environmental protection for scene pod

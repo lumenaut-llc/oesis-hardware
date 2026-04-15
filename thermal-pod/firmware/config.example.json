@@ -1,0 +1,8 @@
+{
+  "node_id": "thermal-pod-01",
+  "location_mode": "outdoor",
+  "install_role": "fixed_scene",
+  "sample_interval_s": 10,
+  "hot_threshold_c": 30.0,
+  "privacy_mode": "derived_only"
+}
