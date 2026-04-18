@@ -1,0 +1,98 @@
+name: Sync from contracts
+
+# Verifies that every oesis-contracts GitHub URL cited in hardware docs still
+# resolves at the new contracts SHA. Opens an issue if broken references are
+# found — hardware does not embed contract files, so there is nothing to copy.
+
+on:
+  repository_dispatch:
+    types: [contracts-updated]
+  workflow_dispatch:
+    inputs:
+      contracts_sha:
+        description: 'Contracts SHA to verify against (defaults to HEAD of lumenaut-llc/oesis-contracts main)'
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout self
+        uses: actions/checkout@v4
+
+      - name: Resolve contracts SHA
+        id: cref
+        shell: bash
+        run: |
+          sha="${{ github.event.client_payload.contracts_sha || inputs.contracts_sha }}"
+          if [ -z "$sha" ]; then
+            sha=$(git ls-remote https://github.com/lumenaut-llc/oesis-contracts.git HEAD | awk '{print $1}')
+          fi
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "short=${sha:0:12}" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout oesis-contracts at new SHA
+        uses: actions/checkout@v4
+        with:
+          repository: lumenaut-llc/oesis-contracts
+          ref: ${{ steps.cref.outputs.sha }}
+          path: _contracts
+
+      - name: Checkout oesis-program-specs
+        uses: actions/checkout@v4
+        with:
+          repository: lumenaut-llc/oesis-program-specs
+          path: _specs
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify references
+        id: verify
+        shell: bash
+        run: |
+          set +e
+          python3 _specs/scripts/repo_split.py sync-hardware-refs \
+            --specs-root _specs \
+            --contracts-root _contracts \
+            --hardware-root . \
+            --contracts-ref "${{ steps.cref.outputs.sha }}" \
+            --json > sync-summary.json
+          rc=$?
+          cat sync-summary.json
+          rm -rf _contracts _specs
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          exit 0  # never fail the job here; we file an issue instead
+
+      - name: Open drift issue if refs are broken
+        if: steps.verify.outputs.rc != '0'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const summary = fs.readFileSync('sync-summary.json', 'utf8');
+            const sha = '${{ steps.cref.outputs.sha }}';
+            const short = '${{ steps.cref.outputs.short }}';
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Broken oesis-contracts references after sync @ ${short}`,
+              labels: ['automated', 'contracts-sync', 'drift'],
+              body: [
+                `The \`sync-from-contracts\` workflow detected oesis-contracts URLs in this repo that no longer resolve at [oesis-contracts@${short}](https://github.com/lumenaut-llc/oesis-contracts/commit/${sha}).`,
+                '',
+                '<details><summary>Report</summary>',
+                '',
+                '```json',
+                summary,
+                '```',
+                '',
+                '</details>',
+              ].join('\n'),
+            });
