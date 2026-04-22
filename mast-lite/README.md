@@ -118,3 +118,15 @@ See `open-questions.md` for unresolved decisions on enclosure venting, UV inclus
 - `serial-json-contract.md`
 - `operator-runbook.md`
 - `firmware/README.md`
+
+## Platform standards alignment
+
+mast-lite's design and deployment posture are governed by platform-level standards in the sibling `oesis-program-specs` repo:
+
+- **Deployment-class defaults** (sheltered class → 12V-DC or USB-from-indoor / IP44 / serial → Wi-Fi permitted) from [`deployment-maturity-ladder.md`](https://github.com/lumenaut-llc/oesis-program-specs/blob/main/architecture/system/deployment-maturity-ladder.md) "Deployment-class standards".
+- **Calibration posture** from [`calibration-program.md`](https://github.com/lumenaut-llc/oesis-program-specs/blob/main/architecture/system/calibration-program.md) §A–§G. Mast-lite targets `deployment maturity v1.0` per the v0.2 promotion bar.
+- **Radiation shield as a required protective fixture** per calibration-program §C item 7 — pre-verification readings are inadmissible to the calibration dataset. Acceptance test for the shield's thermal-loading behavior lives in `oesis-builds/specs/mast-lite/radiation-shield-thermal-loading-test.md` (to author).
+- **Sensor variant selection** — sintered-filter outdoor-rated SHT45 required for sheltered class per [`sensor-placement-and-representativeness-guide.md`](https://github.com/lumenaut-llc/oesis-program-specs/blob/main/architecture/system/sensor-placement-and-representativeness-guide.md) Sensor variant selection principles.
+- **§F metadata block** lives in [`oesis-builds/specs/mast-lite/v0-1.md`](https://github.com/lumenaut-llc/oesis-builds/blob/main/specs/mast-lite/v0-1.md) front-matter (skeleton; build spec and calibration procedure pending per gap G12 — this is the primary v0.2 promotion blocker).
+- **Architecture aggregator**: [`parts/mast-lite.md`](https://github.com/lumenaut-llc/oesis-program-specs/blob/main/architecture/system/parts/mast-lite.md).
+- **ADR 0008** records the decision (2026-04-19) to write the mast-lite spec as a Milestone 2 gate rather than scope heat formula to indoor-bridge-only: [`adr/0008-mast-lite-build-spec-as-milestone-2-gate.md`](https://github.com/lumenaut-llc/oesis-program-specs/blob/main/meta/adr/0008-mast-lite-build-spec-as-milestone-2-gate.md).

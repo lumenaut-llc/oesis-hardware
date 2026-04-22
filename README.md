@@ -48,6 +48,17 @@ Hardware docs follow the same lane model as the runtime:
 | **[v1.0](v1.0/)** | Fielded parcel kit with trust scoring support |
 | **[v1.5](v1.5/)** | Bridge hardware: indoor-response, power-outage, equipment-state |
 
+## Calibration posture and admissibility
+
+Every node family in this repository is subject to the calibration program and adapter-trust program defined in [`oesis-program-specs/architecture/system/`](https://github.com/lumenaut-llc/oesis-program-specs/tree/main/architecture/system):
+
+- **Physical sensor nodes** (bench-air, mast-lite, flood, weather-pm-mast, thermal-pod): governed by [`calibration-program.md`](https://github.com/lumenaut-llc/oesis-program-specs/blob/main/architecture/system/calibration-program.md). Each node's build spec declares a §F metadata block (deployment class, deployment-maturity target, reference instruments, burn-in parameters, protective fixtures). Readings that fail the §C admissibility check do not enter coefficient fitting or parcel-state claims.
+- **Adapter-derived nodes and methods** (circuit-monitor, future equipment-state-adapter, passive thermal-slope inference): governed by [`adapter-trust-program.md`](https://github.com/lumenaut-llc/oesis-program-specs/blob/main/architecture/system/adapter-trust-program.md). Declared §F metadata block covers source authority, pinned API contract version, onboarding gate, cross-check posture.
+
+Deployment-class standards (power tier, enclosure IP rating, transport tier per class) live in [`deployment-maturity-ladder.md`](https://github.com/lumenaut-llc/oesis-program-specs/blob/main/architecture/system/deployment-maturity-ladder.md); sensor variant selection principles live in [`sensor-placement-and-representativeness-guide.md`](https://github.com/lumenaut-llc/oesis-program-specs/blob/main/architecture/system/sensor-placement-and-representativeness-guide.md).
+
+A node family's inclusion in a promoted lane (v0.2, v0.3, v1.0, …) requires it to meet the calibration posture named in the lane's promotion bar per [`pre-1.0-version-progression.md`](https://github.com/lumenaut-llc/oesis-program-specs/blob/main/architecture/current/pre-1.0-version-progression.md) item 5.
+
 ## Sibling repositories
 
 | Repository | What it contains |

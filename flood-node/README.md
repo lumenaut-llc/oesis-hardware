@@ -132,3 +132,14 @@ See `open-questions.md` for unresolved decisions on sensor interface choice, mou
 - `serial-json-contract.md`
 - `operator-runbook.md`
 - `firmware/README.md`
+
+## Platform standards alignment
+
+flood-node's design and deployment posture are governed by platform-level standards in `oesis-program-specs`:
+
+- **Deployment-class defaults** (outdoor class → battery+solar with 72 h runtime floor, or hardened mains / IP65 / serial → LoRa permitted) from [`deployment-maturity-ladder.md`](https://github.com/lumenaut-llc/oesis-program-specs/blob/main/architecture/system/deployment-maturity-ladder.md) "Deployment-class standards".
+- **Calibration posture** — characterized staff-gauge reference per [`calibration-program.md`](https://github.com/lumenaut-llc/oesis-program-specs/blob/main/architecture/system/calibration-program.md) §A; no burn-in required (ultrasonic sensors do not need conditioning).
+- **Protective fixtures required** per calibration-program §C item 7: **rigid mount at a documented low-point** and **zero-reference tied to a physical staff gauge**. Without documented geometry, depth numbers are not interpretable and readings are inadmissible.
+- **§F metadata block** lives in [`oesis-builds/specs/flood-node/v0-1.md`](https://github.com/lumenaut-llc/oesis-builds/blob/main/specs/flood-node/v0-1.md) front-matter (skeleton pending BOM + procedures).
+- **Architecture aggregator**: [`parts/flood-node.md`](https://github.com/lumenaut-llc/oesis-program-specs/blob/main/architecture/system/parts/flood-node.md).
+- **OSI transport figure**: Figure 8 (LoRa) in [`v0.1-osi-diagrams.md`](https://github.com/lumenaut-llc/oesis-program-specs/blob/main/release/v.0.1/v0.1-osi-diagrams.md).

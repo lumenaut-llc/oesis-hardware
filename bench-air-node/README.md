@@ -126,3 +126,13 @@ See `open-questions.md` for unresolved decisions on enclosure, long-term drift h
 - `serial-json-contract.md`
 - `operator-runbook.md`
 - `firmware/README.md`
+
+## Platform standards alignment
+
+bench-air-node's design and deployment posture are governed by platform-level standards in the sibling `oesis-program-specs` repo. The canonical references are:
+
+- **Deployment-class defaults** (indoor class → USB power / IP20 / serial transport) from [`deployment-maturity-ladder.md`](https://github.com/lumenaut-llc/oesis-program-specs/blob/main/architecture/system/deployment-maturity-ladder.md) "Deployment-class standards".
+- **Calibration posture** — §A reference instrument, §B burn-in gate (48 h for BME680), §C admissibility rule, §F build-spec metadata block — from [`calibration-program.md`](https://github.com/lumenaut-llc/oesis-program-specs/blob/main/architecture/system/calibration-program.md).
+- **Sensor variant selection** (bare SHT45 acceptable for indoor class; sintered-filter variant required for sheltered / outdoor) from [`sensor-placement-and-representativeness-guide.md`](https://github.com/lumenaut-llc/oesis-program-specs/blob/main/architecture/system/sensor-placement-and-representativeness-guide.md).
+- **§F metadata block for this node** lives in [`oesis-builds/specs/bench-air-node/v0-1.md`](https://github.com/lumenaut-llc/oesis-builds/blob/main/specs/bench-air-node/v0-1.md) front-matter and is the authoritative declaration of class / power / IP / transport / sensor variants / burn-in / protective fixtures / reference instruments.
+- **Architecture aggregator** for this node across all repos: [`parts/bench-air-node.md`](https://github.com/lumenaut-llc/oesis-program-specs/blob/main/architecture/system/parts/bench-air-node.md).
