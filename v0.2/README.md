@@ -49,4 +49,4 @@ normalized and combined — without claiming field-hardened outdoor deployment.
 - `https://github.com/lumenaut-llc/oesis-program-specs/blob/main/release/v0.2/v0.2-scope-matrix.md`
 - `https://github.com/lumenaut-llc/oesis-program-specs/blob/main/release/v0.2/v0.2-gap-register.md`
 - `https://github.com/lumenaut-llc/oesis-program-specs/blob/main/architecture/current/pre-1.0-version-progression.md`
-- `../mast-lite/README.md`
+- `../v0.1/mast-lite/README.md`
