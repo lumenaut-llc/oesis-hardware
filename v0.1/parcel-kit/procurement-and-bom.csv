@@ -1,7 +1,7 @@
 stage,subsystem,item,quantity,notes
 buy-now,bench air node,ESP32-S3 DevKitC-1,1,First controller for simple node
 buy-now,bench air node,SHT45 breakout,1,Primary temp and humidity sensor
-buy-now,bench air node,BME688 breakout,1,Pressure plus VOC/gas trend sensor
+buy-now,bench air node,BME680 breakout,1,Pressure plus VOC/gas trend sensor
 buy-now,bench air node,830-point breadboard,1,Main prototyping board
 buy-now,bench air node,Female-to-male jumper wire pack,1,Most useful first jumper set
 buy-now,bench air node,Male-to-male jumper wire pack,1,Useful for breadboard routing
